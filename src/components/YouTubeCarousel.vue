@@ -1,15 +1,18 @@
 <template>
   <div class="carousel-container">
-    <img src="../assets/thumb dia 18-1.jpg" alt="">
+    <img :src="headerImage" alt="Header Image">
     <div class="header-overlay">
-      <h2 class="section-title">Episódios Recentes</h2>
-      <p class="section-description">Confira os últimos episódios do nosso canal</p>
+      <h2 class="section-title">Episódios</h2>
+      <p class="section-description">Confira todos os episódios da primeira temporada</p>
     </div>
     <div class="youtube-carousel">
       <carousel
         :per-page="perPage"
         :navigation-enabled="true"
-        
+        :pagination-enabled="false"
+        :navigation-prev-label="prevButtonContent"
+        :navigation-next-label="nextButtonContent"
+        :loop="false"
       >
         <slide v-for="(video, index) in videos" :key="index">
           <div class="video-container">
@@ -18,8 +21,7 @@
               style="border: none"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
-            >
-            </iframe>
+            ></iframe>
           </div>
         </slide>
       </carousel>
@@ -27,8 +29,12 @@
   </div>
 </template>
 
+
 <script>
 import { Carousel, Slide } from "vue-carousel";
+import headerImage from '../assets/thumb dia 18-1.jpg';
+import prevButtonImage from '@/assets/seta-esquerda.png';
+import nextButtonImage from '@/assets/seta-direita.png';
 
 export default {
   name: "YouTubeCarousel",
@@ -38,6 +44,7 @@ export default {
   },
   data() {
     return {
+      headerImage: headerImage,
       videos: [
         { id: "Vu7KrhblBYg" },
         { id: "RmZ5VznWgAg" },
@@ -65,6 +72,8 @@ export default {
         { id: "3wDcYGU1QL0" },
       ],
       perPage: 3, // Default value for larger screens
+      prevButtonContent: `<img src="${prevButtonImage}" alt="Anterior">`,
+      nextButtonContent: `<img src="${nextButtonImage}" alt="Próximo">`
     };
   },
   created() {
@@ -91,9 +100,13 @@ export default {
 </script>
 
 <style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 .carousel-container {
   width: 100%;
   margin: 0 auto;
+  font-family: 'Inter', sans-serif; /* Aplica a fonte Inter */
 }
 
 img {
@@ -120,9 +133,8 @@ img {
   margin: 0;
 }
 
-.VueCarousel-dot{
-  color: #ffffff;
-  background-color: #ffffff;
+.VueCarousel-dot {
+  display: none; /* Esconde os pontinhos de navegação */
 }
 
 .youtube-carousel {
@@ -132,28 +144,29 @@ img {
   z-index: 1;
 }
 
-
-
-.carousel__next{
-  color: #ffffff;
-  background-color: #ffffff;
+.carousel-prev,
+.carousel-next {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
 }
 
-.VueCarousel-navigation-prev {
- right: -50px;;
+.carousel-prev {
+  left: -50px;
 }
 
-.VueCarousel-navigation-next {
- 
-  color: #ffffff;
-  background-color: #ffffff;
+.carousel-next {
+  right: -50px;
 }
 
-
-
-.VueCarousel-navigation-button:hover,
-.VueCarousel-navigation-button:focus {
-  outline: none;
+.carousel-prev img,
+.carousel-next img {
+  width: 50px;
+  height: 50px;
 }
 
 .video-container {
@@ -163,9 +176,10 @@ img {
   margin: 10px 0 10px 0;
 }
 
-.VueCarousel-slide{
+.VueCarousel-slide {
   margin-right: 10px;
 }
+
 .video-container iframe {
   position: absolute;
   top: 0;
@@ -180,11 +194,38 @@ img {
   .youtube-carousel {
     width: 90%;
   }
+
+  .carousel-prev,
+  .carousel-next {
+    left: -25px;
+    right: -25px;
+    top: 60%;
+  }
+
+  .carousel-prev img,
+  .carousel-next img {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 @media (max-width: 576px) {
   .youtube-carousel {
     width: 100%;
   }
+
+  .carousel-prev,
+  .carousel-next {
+    left: -15px;
+    right: -15px;
+    top: 70%;
+  }
+
+  .carousel-prev img,
+  .carousel-next img {
+    width: 30px;
+    height: 30px;
+  }
 }
+
 </style>
