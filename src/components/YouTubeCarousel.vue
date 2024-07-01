@@ -32,7 +32,7 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
-import headerImage from '../assets/thumb dia 18-1.jpg';
+import headerImage from '../assets/bolha2.jpeg';
 import prevButtonImage from '@/assets/seta-esquerda.png';
 import nextButtonImage from '@/assets/seta-direita.png';
 

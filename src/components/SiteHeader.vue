@@ -3,8 +3,7 @@
     <img src="../assets/logo (2).png" alt="Logo" class="logo">
     <nav>
       <ul>
-        <li><a href="#episodios">Episódios</a></li>
-        <li><a href="#noticias">Notícias</a></li>
+       
         <li class="dropdown" @click="toggleDropdown">
           <a href="#repercussao">Inscrições</a>
           <ul class="dropdown-menu" v-if="isDropdownOpen">
@@ -12,6 +11,8 @@
             <li><a href="https://forms.gle/DQoqnMJpcCZYiE1x5">Mete ou Match</a></li>
           </ul>
         </li>
+        <li><a href="#episodios">Episódios</a></li>
+        <li><a href="#noticias">Notícias</a></li>
       </ul>
     </nav>
   </header>
@@ -51,7 +52,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 header {
-  position: fixed;
+
   top: 0;
   width: 100%;
   display: flex;
