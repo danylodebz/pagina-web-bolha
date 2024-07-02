@@ -1,10 +1,13 @@
 <template>
   <div class="carousel-container">
-    <img :src="headerImage" alt="Header Image">
+    <div class="separator"></div> <!-- Linha de separação -->
     <div class="header-overlay">
       <h2 class="section-title">Episódios</h2>
       <p class="section-description">Confira todos os episódios da primeira temporada</p>
     </div>
+    
+   
+
     <div class="youtube-carousel">
       <carousel
         :per-page="perPage"
@@ -13,6 +16,7 @@
         :navigation-prev-label="prevButtonContent"
         :navigation-next-label="nextButtonContent"
         :loop="false"
+        :scroll-per-page="true"
       >
         <slide v-for="(video, index) in videos" :key="index">
           <div class="video-container">
@@ -99,8 +103,8 @@ export default {
 };
 </script>
 
-<style scoped>
 
+<style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 .carousel-container {
@@ -121,6 +125,13 @@ img {
   border-radius: 10px;
   margin-top: 50px; /* Adjust the top margin as needed */
   margin-bottom: 20px; /* Adjust the bottom margin as needed */
+}
+
+.separator {
+  width: 100%;
+  height: 2px;
+  background-color: #ccc;
+  margin: 20px 0; /* Margem para criar espaçamento */
 }
 
 .section-title {
@@ -227,5 +238,4 @@ img {
     height: 30px;
   }
 }
-
 </style>

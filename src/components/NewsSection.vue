@@ -1,7 +1,8 @@
 <template>
   <div class="news-section">
-    <h2 class="section-title">Últimas Notícias</h2>
     <div class="divider"></div>
+    <h2 class="section-title">Últimas Notícias</h2>
+    
     <div class="row">
       <div class="col" v-for="(item, index) in newsItems.slice(0, 3)" :key="index">
         <div class="news-item">
@@ -65,10 +66,12 @@ export default {
   text-align: center;
   margin-bottom: 30px;
   color: #ffffff;
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
 
 .divider {
-  width: 80%;
+  width: 100%;
   height: 2px;
   background-color: #ccc;
   margin: 20px auto;

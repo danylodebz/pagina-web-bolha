@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <SiteHeader />
+    <InscricaoTemplate />
     <YouTubeCarousel />
     <NewsSection />
+    
   </div>
 </template>
 
@@ -10,13 +12,15 @@
 import SiteHeader from './components/SiteHeader.vue';
 import YouTubeCarousel from './components/YouTubeCarousel.vue';
 import NewsSection from './components/NewsSection.vue';
+import InscricaoTemplate from './components/InscricaoTemplate.vue';
 
 export default {
   name: 'App',
   components: {
     SiteHeader,
     YouTubeCarousel,
-    NewsSection
+    NewsSection,
+    InscricaoTemplate
   },
 };
 </script>
