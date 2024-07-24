@@ -6,17 +6,14 @@
       <p class="section-description">Confira todos os episódios da primeira temporada</p>
     </div>
     
-   
-
     <div class="youtube-carousel">
       <carousel
+        ref="carousel"
         :per-page="perPage"
-        :navigation-enabled="true"
-        :pagination-enabled="false"
-        :navigation-prev-label="prevButtonContent"
-        :navigation-next-label="nextButtonContent"
+        :navigationEnabled="false"
+        :paginationEnabled="false"
         :loop="false"
-        :scroll-per-page="true"
+        :scrollPerPage="true"
       >
         <slide v-for="(video, index) in videos" :key="index">
           <div class="video-container">
@@ -29,19 +26,26 @@
           </div>
         </slide>
       </carousel>
+      <div class="navigation">
+        <button class="carousel-prev" @click="prevSlide">
+          <img :src="prevButtonImage" alt="Anterior">
+        </button>
+        <button class="carousel-next" @click="nextSlide">
+          <img :src="nextButtonImage" alt="Próximo">
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
-
 <script>
-import { Carousel, Slide } from "vue-carousel";
+import { Carousel, Slide } from 'vue-carousel';
 import headerImage from '../assets/bolha2.jpeg';
 import prevButtonImage from '@/assets/seta-esquerda.png';
 import nextButtonImage from '@/assets/seta-direita.png';
 
 export default {
-  name: "YouTubeCarousel",
+  name: 'YouTubeCarousel',
   components: {
     Carousel,
     Slide,
@@ -76,8 +80,8 @@ export default {
         { id: "3wDcYGU1QL0" },
       ],
       perPage: 3, // Default value for larger screens
-      prevButtonContent: `<img src="${prevButtonImage}" alt="Anterior">`,
-      nextButtonContent: `<img src="${nextButtonImage}" alt="Próximo">`
+      prevButtonImage: prevButtonImage,
+      nextButtonImage: nextButtonImage
     };
   },
   created() {
@@ -99,10 +103,21 @@ export default {
         this.perPage = 3;
       }
     },
+    prevSlide() {
+      console.log("Slide anterior");
+      if (this.$refs.carousel) {
+        this.$refs.carousel.goToPage(this.$refs.carousel.currentPage - 1);
+      }
+    },
+    nextSlide() {
+      console.log("Next slide");
+      if (this.$refs.carousel) {
+        this.$refs.carousel.goToPage(this.$refs.carousel.currentPage + 1);
+      }
+    }
   },
 };
 </script>
-
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -129,8 +144,8 @@ img {
 
 .separator {
   width: 100%;
-  height: 2px;
-  background-color: #ccc;
+  height: 7px;
+  background-color: #585858;
   margin: 20px 0; /* Margem para criar espaçamento */
 }
 
@@ -149,29 +164,41 @@ img {
 }
 
 .youtube-carousel {
-  width: 80%;
+  width: 100%; /* Alterado para 100% */
   margin: 0 auto;
   position: relative;
   z-index: 1;
 }
 
-.carousel-prev,
-.carousel-next {
-  background: none;
-  border: none;
-  cursor: pointer;
+.navigation {
   position: absolute;
   top: 50%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
   transform: translateY(-50%);
-  z-index: 2;
+  z-index: 2; /* Garante que os botões estejam acima dos vídeos */
+}
+
+.carousel-prev,
+.carousel-next {
+  background: rgba(0, 0, 0, 0.5); /* Fundo transparente escuro */
+  border: none;
+  cursor: pointer;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+  background: rgba(0, 0, 0, 0.7); /* Fundo mais escuro ao passar o mouse */
 }
 
 .carousel-prev {
-  left: -50px;
+  left: 0; /* Ajustado para alinhar ao vídeo da extremidade esquerda */
 }
 
 .carousel-next {
-  right: -50px;
+  right: 0; /* Ajustado para alinhar ao vídeo da extremidade direita */
 }
 
 .carousel-prev img,
@@ -203,14 +230,7 @@ img {
 /* Media queries para responsividade */
 @media (max-width: 992px) {
   .youtube-carousel {
-    width: 90%;
-  }
-
-  .carousel-prev,
-  .carousel-next {
-    left: -25px;
-    right: -25px;
-    top: 60%;
+    width: 100%; /* Certifique-se de que seja 100% em todos os tamanhos de tela */
   }
 
   .carousel-prev img,
@@ -222,14 +242,7 @@ img {
 
 @media (max-width: 576px) {
   .youtube-carousel {
-    width: 100%;
-  }
-
-  .carousel-prev,
-  .carousel-next {
-    left: -15px;
-    right: -15px;
-    top: 70%;
+    width: 100%; /* Certifique-se de que seja 100% em todos os tamanhos de tela */
   }
 
   .carousel-prev img,

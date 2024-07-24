@@ -72,7 +72,7 @@
     cursor: pointer;
     width: 40%;
     font-family: 'Inter', sans-serif;
-    font-size: 20px;
+    font-size: 16px;
    
   }
   

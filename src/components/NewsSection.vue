@@ -72,8 +72,8 @@ export default {
 
 .divider {
   width: 100%;
-  height: 2px;
-  background-color: #ccc;
+  height: 9px;
+  background-color: #464646;
   margin: 20px auto;
 }
 
